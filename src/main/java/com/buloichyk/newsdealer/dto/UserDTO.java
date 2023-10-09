@@ -1,7 +1,7 @@
 package com.buloichyk.newsdealer.dto;
 
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 public class UserDTO {
     private String username;
@@ -9,7 +9,9 @@ public class UserDTO {
 
     private String email;
 
-    private LocalDateTime dateOfBirthday;
+    private LocalDate dateOfBirthday;
+
+    private String country;
 
     public String getUsername() {
         return username;
@@ -35,11 +37,19 @@ public class UserDTO {
         this.email = email;
     }
 
-    public LocalDateTime getDateOfBirthday() {
+    public LocalDate getDateOfBirthday() {
         return dateOfBirthday;
     }
 
-    public void setDateOfBirthday(LocalDateTime dateOfBirthday) {
+    public void setDateOfBirthday(LocalDate dateOfBirthday) {
         this.dateOfBirthday = dateOfBirthday;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
     }
 }
