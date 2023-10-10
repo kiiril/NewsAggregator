@@ -18,11 +18,10 @@ public class User {
     @Column(name = "password")
     private String password;
 
-    @Column(name = "email")
-    private String email;
-
     @Column(name = "date_of_birthday")
     private LocalDate dateOfBirthday;
+
+    private String country;
 
     public User() {}
 
@@ -50,19 +49,19 @@ public class User {
         this.password = password;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public LocalDate getDateOfBirthday() {
         return dateOfBirthday;
     }
 
     public void setDateOfBirthday(LocalDate dateOfBirthday) {
         this.dateOfBirthday = dateOfBirthday;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
     }
 }

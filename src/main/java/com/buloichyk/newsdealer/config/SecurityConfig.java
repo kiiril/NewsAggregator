@@ -25,7 +25,6 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain applicationSecurity(HttpSecurity http) throws Exception {
         http
-                .csrf().disable()
                 .authorizeHttpRequests((authorize) -> authorize
                         .requestMatchers("/main", "/login", "/registration").permitAll()
                         .anyRequest().authenticated())
@@ -33,8 +32,8 @@ public class SecurityConfig {
                         .loginPage("/login")
                         .loginProcessingUrl("/process_login")
                         .defaultSuccessUrl("/hello", true)
-                        .failureUrl("/login?error"));
-
+                        .failureUrl("/login?error"))
+                        .logout(user -> user.logoutUrl("/logout").logoutSuccessUrl("/login"));
         http.userDetailsService(usersDetailsService);
 
         return http.build();
@@ -42,6 +41,6 @@ public class SecurityConfig {
 
     @Bean
     public PasswordEncoder getPasswordEncoder() {
-        return NoOpPasswordEncoder.getInstance();
+        return new BCryptPasswordEncoder();
     }
 }

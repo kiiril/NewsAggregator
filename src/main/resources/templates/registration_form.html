@@ -24,56 +24,36 @@
 
 </head>
 <body>
-  <div class="container-fluid border d-flex align-items-center justify-content-center vh-100">
+  <div class="container-fluid d-flex align-items-center justify-content-center vh-100">
 
     <form class="border w-75" th:action="@{/registration}" method="POST" th:object="${userDTO}">
 
-      <div class="row mb-3">
-        <div class="col text-center">
-          <h1 class="h3">Registration</h1>
-        </div>
+      <div class="row m-auto mb-5 text-center">
+          <h1 class="h3">Create an account</h1>
       </div>
 
 
-      <div class="row mb-5">
-        <div class="col-6">
-          <div class="form-floating mb-2 mx-5 w-50">
+      <div class="row m-auto mb-5">
+        <div class="col-6 p-0 m-auto">
+          <div class="form-floating mb-2 m-auto w-50">
             <input type="text" id="username" th:field="*{username}" class="form-control h-100" placeholder="Username">
             <label for="username" class="form-label my-0">Username</label>
           </div>
-          <div class="form-floating mb-2 mx-5 w-50">
+          <div class="form-floating mb-2 m-auto w-50">
             <input type="password" id="password" th:field="*{password}" class="form-control h-100" placeholder="Password">
             <label for="password" class="form-label my-0">Password</label>
           </div>
-          <div class="mb-2 mx-5 w-50">
             <!-- you can make form-floating here as well -->
-            <div class="input-group">
-              <span class="input-group-text">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar" viewBox="0 0 16 16">
-                  <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
-                </svg>
-              </span>
-              <div class="">
-                <input type="text" class="form-control datepicker" th:field="*{dateOfBirthday}" placeholder="Date of birthday" id="datepicker">
-              </div>
-            </div>
-
-          </div>
-
-          <!-- attempt with floating-->
-          <!-- <div class="input-group">
+          <div class="input-group m-auto w-50 mb-2">
             <span class="input-group-text">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar" viewBox="0 0 16 16">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-calendar" viewBox="0 0 16 16">
                 <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
               </svg>
             </span>
-            <div class="form-floating">
-              <input type="text" class="form-control datepicker" placeholder="Birthday Date" id="datepicker">
-              <label for="datepicker">Date of birthday</label>
-            </div>
-          </div> -->
+            <input type="text" class="form-control datepicker" th:field="*{dateOfBirthday}" placeholder="Date of birthday" id="datepicker">
+          </div>
 
-          <select class="form-select mx-5 w-50" th:field="*{country}">
+          <select class="form-select m-auto w-50" th:field="*{country}">
             <option value="null">Select country</option>
             <option value="Afghanistan">Afghanistan</option>
             <option value="Albania">Albania</option>
@@ -318,40 +298,66 @@
 
         </div>
 
-        <div class="col-6">
-          <input type="checkbox" class="btn-check" name="sport" id="sport" autocomplete="off">
-          <label class="btn btn-outline-primary" for="sport">Sport</label>
+        <div class="col-6 p-0">
 
-          <input type="checkbox" class="btn-check" name="politics" id="politics" autocomplete="off">
-          <label class="btn btn-outline-primary" for="politics">Politics</label>
+          <h2 class="h5">Choose Categories</h2>
 
-          <input type="checkbox" class="btn-check" name="finance" id="finance" autocomplete="off">
-          <label class="btn btn-outline-primary" for="finance">Finance</label>
+          <table class="table table-borderless">
+            <tr>
+              <td>
+                <input type="checkbox" class="btn-check" name="sport" id="sport" autocomplete="off" style="width: 100%">
+                <label class="btn btn-outline-primary" for="sport">Sport</label>
+              </td>
+              <td>
+                <input type="checkbox" class="btn-check" name="politics" id="politics" autocomplete="off">
+                <label class="btn btn-outline-primary" for="politics">Politics</label>
+              </td>
+              <td>
+                <input type="checkbox" class="btn-check" name="finance" id="finance" autocomplete="off">
+                <label class="btn btn-outline-primary" for="finance">Finance</label>
+              </td>
+              <td>
+                <input type="checkbox" class="btn-check" name="technology" id="technology" autocomplete="off">
+                <label class="btn btn-outline-primary" for="technology">Technology</label>
+              </td>
+            </tr>
 
-          <input type="checkbox" class="btn-check" name="technology" id="technology" autocomplete="off">
-          <label class="btn btn-outline-primary" for="technology">Technology</label>
+            <tr>
+              <td>
+                <input type="checkbox" class="btn-check" name="business" id="business" autocomplete="off">
+                <label class="btn btn-outline-primary" for="business">Business</label>
+              </td>
+              <td>
+                <input type="checkbox" class="btn-check" name="travel" id="travel" autocomplete="off">
+                <label class="btn btn-outline-primary" for="travel">Travel</label>
+              </td>
+              <td>
+                <input type="checkbox" class="btn-check" name="fashion" id="fashion" autocomplete="off">
+                <label class="btn btn-outline-primary" for="fashion">Fashion</label>
+              </td>
+              <td>
+                <input type="checkbox" class="btn-check" name="culture" id="culture" autocomplete="off">
+                <label class="btn btn-outline-primary" for="culture">Culture</label>
+              </td>
+            </tr>
 
-          <input type="checkbox" class="btn-check" name="business" id="business" autocomplete="off">
-          <label class="btn btn-outline-primary" for="business">Business</label>
+            <tr>
+              <td>
+                <input type="checkbox" class="btn-check" name="science" id="science" autocomplete="off">
+                <label class="btn btn-outline-primary" for="science">Science</label>
+              </td>
+              <td>
+                <input type="checkbox" class="btn-check" name="food" id="food" autocomplete="off">
+                <label class="btn btn-outline-primary" for="food">Food</label>
+              </td>
+              <td></td>
+              <td></td>
+            </tr>
+          </table>
 
-          <input type="checkbox" class="btn-check" name="travel" id="travel" autocomplete="off">
-          <label class="btn btn-outline-primary" for="travel">Travel</label>
-
-          <input type="checkbox" class="btn-check" name="culture" id="culture" autocomplete="off">
-          <label class="btn btn-outline-primary" for="culture">Culture</label>
-
-          <input type="checkbox" class="btn-check" name="fashion" id="fashion" autocomplete="off">
-          <label class="btn btn-outline-primary" for="fashion">Fashion</label>
 
 
-          <input type="checkbox" class="btn-check" name="science" id="science" autocomplete="off">
-          <label class="btn btn-outline-primary" for="science">Science</label>
 
-          <input type="checkbox" class="btn-check" name="food" id="food" autocomplete="off">
-          <label class="btn btn-outline-primary" for="food">Food</label>
-
-          <!-- <input type="checkbox" class="btn-check" id="btn-check" autocomplete="off">
-          <label class="btn btn-primary" for="btn-check">Single toggle</label> -->
 
         </div>
 
