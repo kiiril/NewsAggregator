@@ -2,6 +2,7 @@ package com.buloichyk.newsdealer.dto;
 
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class UserDTO {
     private String username;
@@ -10,6 +11,10 @@ public class UserDTO {
     private LocalDate dateOfBirthday;
 
     private String country;
+
+    private String language;
+
+    private List<Integer> selectedCategoriesIds;
 
     public String getUsername() {
         return username;
@@ -41,5 +46,21 @@ public class UserDTO {
 
     public void setCountry(String country) {
         this.country = country;
+    }
+
+    public String getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(String language) {
+        this.language = language;
+    }
+
+    public List<Integer> getSelectedCategoriesIds() {
+        return selectedCategoriesIds;
+    }
+
+    public void setSelectedCategoriesIds(List<Integer> selectedCategoriesIds) {
+        this.selectedCategoriesIds = selectedCategoriesIds;
     }
 }

@@ -1,13 +1,12 @@
 package com.buloichyk.newsdealer.config;
 
-import com.buloichyk.newsdealer.services.UsersDetailsServiceImpl;
+import com.buloichyk.newsdealer.services.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
@@ -15,10 +14,10 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 public class SecurityConfig {
 
-    private final UsersDetailsServiceImpl usersDetailsService;
+    private final UserDetailsServiceImpl usersDetailsService;
 
     @Autowired
-    public SecurityConfig(UsersDetailsServiceImpl usersDetailsService) {
+    public SecurityConfig(UserDetailsServiceImpl usersDetailsService) {
         this.usersDetailsService = usersDetailsService;
     }
 
@@ -31,7 +30,7 @@ public class SecurityConfig {
                 .formLogin(form -> form
                         .loginPage("/login")
                         .loginProcessingUrl("/process_login")
-                        .defaultSuccessUrl("/hello", true)
+                        .defaultSuccessUrl("/main", true)
                         .failureUrl("/login?error"))
                         .logout(user -> user.logoutUrl("/logout").logoutSuccessUrl("/login"));
         http.userDetailsService(usersDetailsService);

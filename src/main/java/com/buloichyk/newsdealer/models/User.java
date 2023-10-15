@@ -3,9 +3,10 @@ package com.buloichyk.newsdealer.models;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
-@Table(name = "user_info")
+@Table(name = "person")
 public class User {
     @Id
     @Column(name = "id")
@@ -21,7 +22,20 @@ public class User {
     @Column(name = "date_of_birthday")
     private LocalDate dateOfBirthday;
 
+    @Column(name = "country")
     private String country;
+
+
+    @Column(name = "language")
+    private String language;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "person_category",
+            joinColumns = @JoinColumn(name = "person_id"),
+            inverseJoinColumns = @JoinColumn(name = "category_id")
+    )
+    private List<Category> categories;
 
     public User() {}
 
@@ -63,5 +77,22 @@ public class User {
 
     public void setCountry(String country) {
         this.country = country;
+    }
+
+    public List<Category> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(List<Category> categories) {
+        this.categories = categories;
+    }
+
+    public String getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(String language) {
+        // TODO switch case for languages to convert English -> en or get appropriate value through the form
+        this.language = language;
     }
 }

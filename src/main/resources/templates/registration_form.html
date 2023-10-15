@@ -26,7 +26,7 @@
 <body>
   <div class="container-fluid d-flex align-items-center justify-content-center vh-100">
 
-    <form class="border w-75" th:action="@{/registration}" method="POST" th:object="${userDTO}">
+    <form class="border w-75" th:action="@{/registration}" th:object="${userDTO}" method="POST">
 
       <div class="row m-auto mb-5 text-center">
           <h1 class="h3">Create an account</h1>
@@ -302,64 +302,72 @@
 
           <h2 class="h5">Choose Categories</h2>
 
-          <table class="table table-borderless">
-            <tr>
-              <td>
-                <input type="checkbox" class="btn-check" name="sport" id="sport" autocomplete="off" style="width: 100%">
-                <label class="btn btn-outline-primary" for="sport">Sport</label>
-              </td>
-              <td>
-                <input type="checkbox" class="btn-check" name="politics" id="politics" autocomplete="off">
-                <label class="btn btn-outline-primary" for="politics">Politics</label>
-              </td>
-              <td>
-                <input type="checkbox" class="btn-check" name="finance" id="finance" autocomplete="off">
-                <label class="btn btn-outline-primary" for="finance">Finance</label>
-              </td>
-              <td>
-                <input type="checkbox" class="btn-check" name="technology" id="technology" autocomplete="off">
-                <label class="btn btn-outline-primary" for="technology">Technology</label>
-              </td>
-            </tr>
+<!--          <table class="table table-borderless">-->
+<!--            <tr>-->
+<!--              <td>-->
+<!--                <input type="checkbox" class="btn-check" name="sport" id="sport" autocomplete="off" style="width: 100%">-->
+<!--                <label class="btn btn-outline-primary" for="sport">Sport</label>-->
+<!--              </td>-->
+<!--              <td>-->
+<!--                <input type="checkbox" class="btn-check" name="politics" id="politics" autocomplete="off">-->
+<!--                <label class="btn btn-outline-primary" for="politics">Politics</label>-->
+<!--              </td>-->
+<!--              <td>-->
+<!--                <input type="checkbox" class="btn-check" name="finance" id="finance" autocomplete="off">-->
+<!--                <label class="btn btn-outline-primary" for="finance">Finance</label>-->
+<!--              </td>-->
+<!--              <td>-->
+<!--                <input type="checkbox" class="btn-check" name="technology" id="technology" autocomplete="off">-->
+<!--                <label class="btn btn-outline-primary" for="technology">Technology</label>-->
+<!--              </td>-->
+<!--            </tr>-->
 
-            <tr>
-              <td>
-                <input type="checkbox" class="btn-check" name="business" id="business" autocomplete="off">
-                <label class="btn btn-outline-primary" for="business">Business</label>
-              </td>
-              <td>
-                <input type="checkbox" class="btn-check" name="travel" id="travel" autocomplete="off">
-                <label class="btn btn-outline-primary" for="travel">Travel</label>
-              </td>
-              <td>
-                <input type="checkbox" class="btn-check" name="fashion" id="fashion" autocomplete="off">
-                <label class="btn btn-outline-primary" for="fashion">Fashion</label>
-              </td>
-              <td>
-                <input type="checkbox" class="btn-check" name="culture" id="culture" autocomplete="off">
-                <label class="btn btn-outline-primary" for="culture">Culture</label>
-              </td>
-            </tr>
+<!--            <tr>-->
+<!--              <td>-->
+<!--                <input type="checkbox" class="btn-check" name="business" id="business" autocomplete="off">-->
+<!--                <label class="btn btn-outline-primary" for="business">Business</label>-->
+<!--              </td>-->
+<!--              <td>-->
+<!--                <input type="checkbox" class="btn-check" name="travel" id="travel" autocomplete="off">-->
+<!--                <label class="btn btn-outline-primary" for="travel">Travel</label>-->
+<!--              </td>-->
+<!--              <td>-->
+<!--                <input type="checkbox" class="btn-check" name="fashion" id="fashion" autocomplete="off">-->
+<!--                <label class="btn btn-outline-primary" for="fashion">Fashion</label>-->
+<!--              </td>-->
+<!--              <td>-->
+<!--                <input type="checkbox" class="btn-check" name="culture" id="culture" autocomplete="off">-->
+<!--                <label class="btn btn-outline-primary" for="culture">Culture</label>-->
+<!--              </td>-->
+<!--            </tr>-->
 
-            <tr>
-              <td>
-                <input type="checkbox" class="btn-check" name="science" id="science" autocomplete="off">
-                <label class="btn btn-outline-primary" for="science">Science</label>
-              </td>
-              <td>
-                <input type="checkbox" class="btn-check" name="food" id="food" autocomplete="off">
-                <label class="btn btn-outline-primary" for="food">Food</label>
-              </td>
-              <td></td>
-              <td></td>
-            </tr>
-          </table>
+<!--            <tr>-->
+<!--              <td>-->
+<!--                <input type="checkbox" class="btn-check" name="science" id="science" autocomplete="off">-->
+<!--                <label class="btn btn-outline-primary" for="science">Science</label>-->
+<!--              </td>-->
+<!--              <td>-->
+<!--                <input type="checkbox" class="btn-check" name="food" id="food" autocomplete="off">-->
+<!--                <label class="btn btn-outline-primary" for="food">Food</label>-->
+<!--              </td>-->
+<!--              <td></td>-->
+<!--              <td></td>-->
+<!--            </tr>-->
+<!--          </table>-->
+
+        <!--FIXME just for the test-->
+          <div th:each="category : ${categoriesDTO}">
+            <input type="checkbox" th:field="*{selectedCategoriesIds}" th:value="${category.id}" th:id="'category-' + ${category.id}" autocomplete="off"/>
+            <label th:for="'category-' + ${category.id}" th:text="${category.name}"></label>
+          </div>
 
 
-
-
-
+          <select class="form-select w-25" th:field="*{language}">
+            <option value="en">English</option>
+            <option value="ru">Russian</option>
+          </select>
         </div>
+
 
       </div>
 
@@ -371,12 +379,6 @@
 
     </form>
   </div>
-
-
-
-
-
-
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>

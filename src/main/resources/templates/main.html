@@ -8,7 +8,6 @@
   </head>
 
   <script type="application/javascript">
-    // FIXME not needed javascript code since bootstrap using it inside classes
     document.addEventListener("DOMContentLoaded", function () {
       const listItems = document.querySelectorAll(".list-group-item, .list-group-item-action");
       listItems.forEach(function (item) {
@@ -73,7 +72,7 @@
                 <a class="dropdown-item" href="/settings">Settings</a></li>
               <li>
                 <form method="POST" th:action="@{/logout}">
-                  <button class="dropdown-item" type="button">Log Out</button>
+                  <button class="dropdown-item" type="submit" style="background-color: red">Log Out</button>
                 </form>
               </li>
             </ul>
@@ -86,8 +85,36 @@
   <div class="container-fluid">
     <!-- Search Field -->
     <div class="row">
-      <div class="col">
-        <input type="text" class="form-control" placeholder="Search">
+      <!-- search field -->
+      <div class="col-3 d-flex">
+        <input type="search" class="form-control" placeholder="Search">
+        <button type="button" class="btn btn-success p-auto">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+          </svg>
+        </button>
+      </div>
+      <!-- radio button -->
+      <div class="col-9 d-flex align-items-center">
+        <div class="form-check me-4">
+          <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+          <label class="form-check-label" for="flexRadioDefault1">
+            Search in titles
+          </label>
+        </div>
+        <!-- radio button -->
+        <div class="form-check me-4">
+          <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+          <label class="form-check-label" for="flexRadioDefault2">
+            Search in news
+          </label>
+        </div>
+
+        <input class="" type="checkbox" autocomplete="off" id="specifiedForCountry"/>
+        <label class="me-4" for="specifiedForCountry">Only for my country</label>
+
+        <span>Here must also be filter</span>
+
       </div>
     </div>
 
@@ -111,6 +138,12 @@
         <div th:each="news : ${allNews.getResults()}" th:id="'newsPage' + ${news.getId()}" class="collapse unique">
           <h2 th:text="${news.getTitle()}">News Title</h2>
           <p th:text="${news.getContent()}">Full news content goes here.</p>
+          <p>
+            <span th:text="${news.getCountry()[0]}"></span>
+            <span th:text="${news.getCategory()[0]}"></span>
+            <span th:text="${news.getPubDate()}"></span>
+            <a th:href="${news.getLink()}" th:text="${news.getLink()}"></a>
+          </p>
         </div>
       </div>
     </div>
