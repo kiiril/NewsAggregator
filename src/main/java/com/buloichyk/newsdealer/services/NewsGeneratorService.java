@@ -10,7 +10,7 @@ import org.springframework.web.client.RestTemplate;
 public class NewsGeneratorService {
     private static final String URL = "https://newsdata.io/api/1/news?apikey=pub_30680664b8e369f58dc8cbbeebd4540e5069a";
 
-    public ResponseObject generateNews(User user) {
+    public ResponseObject generateNews(User user, String query) {
         StringBuilder url = new StringBuilder(URL);
         if (user.getCategories() != null && !user.getCategories().isEmpty()) {
             url.append("&category=");
@@ -22,14 +22,22 @@ public class NewsGeneratorService {
         if (user.getLanguage() != null) {
             url.append("&language=").append(user.getLanguage());
         }
+        if (query != null) {
+            url.append("&q=").append(query);
+        }
         RestTemplate restTemplate = new RestTemplate();
         System.out.println(url);
         return restTemplate.getForObject(url.toString(), ResponseObject.class);
     }
 
-    public ResponseObject generateRandomNews() {
+    public ResponseObject generateRandomNews(String query) {
+        StringBuilder url = new StringBuilder(URL);
+        if (query != null) {
+            url.append("&q=").append(query);
+        }
         RestTemplate restTemplate = new RestTemplate();
-        return restTemplate.getForObject(URL, ResponseObject.class);
+        System.out.println(url);
+        return restTemplate.getForObject(url.toString(), ResponseObject.class);
     }
 
 }
