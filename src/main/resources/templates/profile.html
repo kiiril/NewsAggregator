@@ -3,7 +3,13 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title></title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;700&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <title>Profile</title>
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,33 +19,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-datepicker@1.9.0/dist/css/bootstrap-datepicker.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap-datepicker@1.9.0/dist/js/bootstrap-datepicker.min.js"></script>
 
-    <script type="text/javascript">
-
-    // specify the format and additional characteristics to the datepicker field
-    $(document).ready(function() {
-      $('.datepicker').datepicker({
-        format: 'yyyy-mm-dd',
-        autoclose: true,
-        todayHighlight: true
-      });
-    });
-
-    // JQuery used to hide error block when user start typing in this field
-    $(document).ready(function() {
-        $('.inputField').on('input', function() {
-            const inputValue = $(this).val();
-            const errorBlock = $(this).next('.invalid-tooltip');
-            if (inputValue.trim() !== '') {
-                errorBlock.hide();
-            } else {
-                errorBlock.show();
-            }
-        });
-    });
-
-
-    </script>
-
     <style>
       body {
         font-family: 'Poppins', sans-serif;
@@ -48,15 +27,15 @@
         -webkit-appearance: none; /* remove down arrow in select button */
       }
     </style>
+
   </head>
   <body>
     <div class="border d-flex align-items-center justify-content-center vh-100" style="background-color: #f8f8f8;">
-      <div class="container rounded" style="background-color: white">
+      <div class="container" style="background-color: white">
         <div class="row">
           <div class="col-6 ps-5">
-
-            <h1 class="mt-5" style="font-weight: 700">Sign up</h1>
-            <form th:action="@{/registration}" method="POST" th:object="${userDTO}">
+            <h1 class="mt-4" style="font-weight: 700;">Profile</h1>
+            <form class="" th:action="@{/edit}" method="POST" th:object="${user}">
               <!-- USERNAME -->
               <div class="form-group mb-3 mt-3 position-relative" style="border-bottom: 1px solid #999">
                 <label for="username">
@@ -64,30 +43,10 @@
                   <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/>
                   </svg>
                 </label>
-                <input class="inputField" type="text" th:field="*{username}" name="username" style="border: none; outline: none;" placeholder="Username" id="username">
-                <div class="invalid-tooltip" style="display: block" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username validation.</div>
+                <input class="inputField" th:field="*{username}" type="text" name="username" style="border: none; outline: none;" placeholder="Username" id="username">
+                <!-- <div class="invalid-tooltip" style="display: block" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username validation.</div> -->
               </div>
-              <!-- PASSWORD -->
-              <div class="form-group mb-3 position-relative" style="border-bottom: 1px solid #999">
-                <label for="password">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-shield-lock-fill me-2" viewBox="0 0 16 16">
-                    <path fill-rule="evenodd" d="M8 0c-.69 0-1.843.265-2.928.56-1.11.3-2.229.655-2.887.87a1.54 1.54 0 0 0-1.044 1.262c-.596 4.477.787 7.795 2.465 9.99a11.777 11.777 0 0 0 2.517 2.453c.386.273.744.482 1.048.625.28.132.581.24.829.24s.548-.108.829-.24a7.159 7.159 0 0 0 1.048-.625 11.775 11.775 0 0 0 2.517-2.453c1.678-2.195 3.061-5.513 2.465-9.99a1.541 1.541 0 0 0-1.044-1.263 62.467 62.467 0 0 0-2.887-.87C9.843.266 8.69 0 8 0zm0 5a1.5 1.5 0 0 1 .5 2.915l.385 1.99a.5.5 0 0 1-.491.595h-.788a.5.5 0 0 1-.49-.595l.384-1.99A1.5 1.5 0 0 1 8 5z"/>
-                  </svg>
-                </label>
-                <input class="inputField" type="password" th:field="*{password}" name="password" style="border: none; outline: none" placeholder="Password" id="password">
-                <div class="invalid-tooltip" style="display: block" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password validation.</div>
-              </div>
-              <!-- REPEAT PASSWORD -->
-              <div class="form-group mb-2" style="border-bottom: 1px solid #999">
-                <label for="repeatPassword" class="me-2">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-shield-lock" viewBox="0 0 16 16">
-                    <path d="M5.338 1.59a61.44 61.44 0 0 0-2.837.856.481.481 0 0 0-.328.39c-.554 4.157.726 7.19 2.253 9.188a10.725 10.725 0 0 0 2.287 2.233c.346.244.652.42.893.533.12.057.218.095.293.118a.55.55 0 0 0 .101.025.615.615 0 0 0 .1-.025c.076-.023.174-.061.294-.118.24-.113.547-.29.893-.533a10.726 10.726 0 0 0 2.287-2.233c1.527-1.997 2.807-5.031 2.253-9.188a.48.48 0 0 0-.328-.39c-.651-.213-1.75-.56-2.837-.855C9.552 1.29 8.531 1.067 8 1.067c-.53 0-1.552.223-2.662.524zM5.072.56C6.157.265 7.31 0 8 0s1.843.265 2.928.56c1.11.3 2.229.655 2.887.87a1.54 1.54 0 0 1 1.044 1.262c.596 4.477-.787 7.795-2.465 9.99a11.775 11.775 0 0 1-2.517 2.453 7.159 7.159 0 0 1-1.048.625c-.28.132-.581.24-.829.24s-.548-.108-.829-.24a7.158 7.158 0 0 1-1.048-.625 11.777 11.777 0 0 1-2.517-2.453C1.928 10.487.545 7.169 1.141 2.692A1.54 1.54 0 0 1 2.185 1.43 62.456 62.456 0 0 1 5.072.56z"/>
-                    <path d="M9.5 6.5a1.5 1.5 0 0 1-1 1.415l.385 1.99a.5.5 0 0 1-.491.595h-.788a.5.5 0 0 1-.49-.595l.384-1.99a1.5 1.5 0 1 1 2-1.415z"/>
-                  </svg>
-                </label>
-                <input type="password" name="repeatPassword" style="border: none; outline: none" placeholder="Repeat password" id="repeatPassword">
-              </div>
-              <!-- DATE PICKER -->
+              <!-- DATEPICKER -->
               <div class="form-group mb-3 position-relative" style="border-bottom: 1px solid #999">
                 <label for="datepicker" class="me-1">
                   <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16" fill="currentColor" class="bi bi-calendar-date" viewBox="0 0 16 16">
@@ -96,10 +55,10 @@
                   </svg>
                 </label>
                 <input type="text" th:field="*{dateOfBirthday}" class="datepicker inputField" style="border: none; outline: none" placeholder="Date of birthday" id="datepicker">
-                <div class="invalid-tooltip" style="display: block" th:if="${#fields.hasErrors('dateOfBirthday')}" th:errors="*{dateOfBirthday}">Date of birth validation.</div>
+                <!-- <div class="invalid-tooltip" style="display: block" th:if="${#fields.hasErrors('dateOfBirthday')}" th:errors="*{dateOfBirthday}">Date of birth validation.</div> -->
               </div>
 
-              <div class="container-fluid p-0 m-3">
+              <div class="container-fluid p-0 m-3 mt-4 mb-4">
                 <div class="row">
                     <!-- COUNTRY SELECTOR -->
                   <div class="col-5 p-0 py-2 ps-1 border bg-light ms-2 me-4" style="border-radius: 1rem">
@@ -110,7 +69,7 @@
                       </svg>
                     </label>
                     <select th:field="*{country}" class="bg-light" id="countrySelector" style="border: none; outline: none;">
-                      <option value="null" selected disabled>Choose country</option>
+                      <option value="null" disabled>Choose country</option>
                       <option value="af">Afganistan</option>
                       <option value="al">Albania</option>
                       <option value="dz">Algeria</option>
@@ -275,7 +234,7 @@
                       </svg>
                     </label>
                    <select th:field="*{language}" class="bg-light" id="languageSelector" style="border: none; outline: none;">
-                      <option value="null" selected disabled>Choose language</option>
+                      <option value="null" disabled>Choose language</option>
                       <option value="af">Afrikaans</option>
                       <option value="sq">Albanian</option>
                       <option value="am">Amharic</option>
@@ -359,39 +318,29 @@
                       <option value="cy">Welsh</option>
                     </select>
                   </div>
-
                 </div>
               </div>
 
-<!--              <div class="d-flex">-->
-<!--                <div th:each="category : ${categoriesDTO}">-->
-<!--                    <input type="checkbox" th:field="*{selectedCategoriesIds}" th:value="${category.id}" th:id="'category-' + ${category.id}" autocomplete="off"/>-->
-<!--                    <label th:for="'category-' + ${category.id}" th:text="${category.name}"></label>-->
-<!--                </div>-->
-<!--              </div>-->
+              <!-- CATEGORIES -->
+              <div class="ms-1 mb-4 row">
+                  <div th:each="category : ${categoriesDTO}" class="col-md-3 p-0">
+                      <!-- TODO make categories checked after loading the page -->
+                      <input type="checkbox" th:value="${category.id}" th:id="'category-' + ${category.id}" autocomplete="off" th:checked="${user.getCategories().contains(category)}"/>
+                      <label th:for="'category-' + ${category.id}" th:text="${category.name}"></label>
+                  </div>
+              </div>
 
-                <div class="ms-1 mb-4 row">
-                    <div th:each="category : ${categoriesDTO}" class="col-md-3 p-0">
-                        <input type="checkbox" th:field="*{selectedCategoriesIds}" th:value="${category.id}" th:id="'category-' + ${category.id}" autocomplete="off"/>
-                        <label th:for="'category-' + ${category.id}" th:text="${category.name}"></label>
-                    </div>
-                </div>
+              <button class="btn btn-primary w-25 me-2" type="submit">Save</button>
+              <button class="btn w-25" style="background-color: #C0C0C0; color: white" type="submit">Cancel</button>
 
-
-
-                <span>Have already an account? <a th:href="@{/login}">Login here</a></span>
-
-              <button class="btn btn-primary w-50 p-2 mt-3" type="submit">Register</button>
             </form>
-
           </div>
-          <div class="col-6 p-0">
-            <img th:src="@{registration-image.jpeg}" class="img-fluid" alt="img">
+
+          <div class="col-6">
+            <img th:src="@{profile.jpeg}" class="img-fluid" alt="img">
           </div>
         </div>
       </div>
-
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
   </body>
 </html>

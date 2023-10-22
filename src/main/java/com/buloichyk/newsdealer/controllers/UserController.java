@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -61,15 +62,19 @@ public class UserController {
     }
 
     @GetMapping("/registration")
-    public String registrationPage(@ModelAttribute("userDTO")UserDTO userDTO, Model model, BindingResult bindingResult) {
+    public String registrationPage(@ModelAttribute("userDTO")UserDTO userDTO, Model model) {
         List<CategoryDTO> categoriesDTO = categoryService.getAllCategories().stream().map(this::convertToCategoryDTO).toList();
         model.addAttribute("categoriesDTO", categoriesDTO);
         return "registration";
     }
 
     @PostMapping("/registration")
-    public String performRegistration(@ModelAttribute("userDTO") @Valid UserDTO userDTO, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) return "registration";
+    public String performRegistration(@ModelAttribute("userDTO") @Valid UserDTO userDTO, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            List<CategoryDTO> categoriesDTO = categoryService.getAllCategories().stream().map(this::convertToCategoryDTO).toList();
+            model.addAttribute("categoriesDTO", categoriesDTO);
+            return "registration";
+        }
         List<Category> selectedCategories = userDTO.getSelectedCategoriesIds().stream()
                 .map(categoryService::getById).toList();
         User user = convertToUser(userDTO);
@@ -77,6 +82,25 @@ public class UserController {
         registrationService.register(user);
         return "redirect:/login";
     }
+
+    @GetMapping("/profile")
+    public String profile(Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
+        User authorizedUser = userDetails.getUser();
+//        UserDTO userDTO = convertToUserDTO(authorizedUser);
+        model.addAttribute("user", authorizedUser);
+        // TODO check is user is authenticated or not
+        List<CategoryDTO> categoriesDTO = categoryService.getAllCategories().stream().map(this::convertToCategoryDTO).toList();
+        model.addAttribute("categoriesDTO", categoriesDTO);
+        return "profile";
+    }
+
+    @PostMapping("/edit")
+    public String edit() {
+        return "main";
+    }
+
 
     private User convertToUser(UserDTO userDTO) {
         return modelMapper.map(userDTO, User.class);

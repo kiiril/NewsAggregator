@@ -1,9 +1,14 @@
 package com.buloichyk.newsdealer.models;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
+import org.hibernate.annotations.Check;
+import org.hibernate.validator.constraints.Range;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "person")
@@ -13,19 +18,25 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @NotEmpty(message = "Username field can not be empty.")
+    @Size(min = 3, max = 25, message = "Username must be between 3 and 25 characters.")
     @Column(name = "username")
     private String username;
 
+    @NotEmpty(message = "This field is required.")
+    @Size(min = 8, message = "Password must have at least 8 symbols.")
     @Column(name = "password")
     private String password;
 
+    @Past(message = "Incorrect date of birthday chosen.")
     @Column(name = "date_of_birthday")
     private LocalDate dateOfBirthday;
 
+    @NotNull(message = "Choose country from the list.")
     @Column(name = "country")
     private String country;
 
-
+    @NotNull(message = "Choose language from the list.")
     @Column(name = "language")
     private String language;
 
@@ -37,7 +48,8 @@ public class User {
     )
     private List<Category> categories;
 
-    public User() {}
+    public User() {
+    }
 
     public int getId() {
         return id;
@@ -92,7 +104,6 @@ public class User {
     }
 
     public void setLanguage(String language) {
-        // TODO switch case for languages to convert English -> en or get appropriate value through the form
         this.language = language;
     }
 }

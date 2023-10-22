@@ -1,17 +1,30 @@
 package com.buloichyk.newsdealer.dto;
 
 
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Past;
+import jakarta.validation.constraints.Size;
+
 import java.time.LocalDate;
 import java.util.List;
 
 public class UserDTO {
+
+    @NotEmpty(message = "Username field can not be empty.")
+    @Size(min = 3, max = 25, message = "Username must be between 3 and 25 characters.")
     private String username;
+    @NotEmpty(message = "This field is required.")
+    @Size(min = 8, message = "Password must have at least 8 symbols.")
     private String password;
 
+    @Past(message = "Incorrect date of birthday chosen.")
     private LocalDate dateOfBirthday;
 
+    @NotNull(message = "Choose country from the list.")
     private String country;
 
+    @NotNull(message = "Choose language from the list.")
     private String language;
 
     private List<Integer> selectedCategoriesIds;
