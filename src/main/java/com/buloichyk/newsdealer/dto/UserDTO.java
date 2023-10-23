@@ -1,12 +1,14 @@
 package com.buloichyk.newsdealer.dto;
 
 
+import com.buloichyk.newsdealer.models.Category;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Size;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserDTO {
@@ -26,6 +28,8 @@ public class UserDTO {
 
     @NotNull(message = "Choose language from the list.")
     private String language;
+
+    private List<Category> categories;
 
     private List<Integer> selectedCategoriesIds;
 
@@ -75,5 +79,21 @@ public class UserDTO {
 
     public void setSelectedCategoriesIds(List<Integer> selectedCategoriesIds) {
         this.selectedCategoriesIds = selectedCategoriesIds;
+    }
+
+    public List<Category> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(List<Category> categories) {
+        this.categories = categories;
+    }
+
+    public List<Integer> getCategoriesIds() {
+        List<Integer> categoriesIds = new ArrayList<>();
+        for (Category category: getCategories()) {
+            categoriesIds.add(category.getId());
+        }
+        return categoriesIds;
     }
 }
