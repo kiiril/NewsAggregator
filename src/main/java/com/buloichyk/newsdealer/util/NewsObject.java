@@ -1,4 +1,4 @@
-package com.buloichyk.newsdealer.models;
+package com.buloichyk.newsdealer.util;
 
 import java.util.Arrays;
 

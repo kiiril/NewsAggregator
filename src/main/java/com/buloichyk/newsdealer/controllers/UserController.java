@@ -9,6 +9,7 @@ import com.buloichyk.newsdealer.services.CategoryService;
 import com.buloichyk.newsdealer.services.NewsGeneratorService;
 import com.buloichyk.newsdealer.services.RegistrationService;
 import com.buloichyk.newsdealer.services.UserService;
+import com.buloichyk.newsdealer.util.SearchObject;
 import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,16 +43,16 @@ public class UserController {
     }
 
     @GetMapping("/main")
-    public String mainPage(Model model, @RequestParam(value = "query", required = false)String query) {
+    public String mainPage(Model model, @ModelAttribute("searchObject")SearchObject searchObject) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         // checking here is user authenticated or anonymous
         if (authentication instanceof AnonymousAuthenticationToken) {
-            model.addAttribute("allNews", newsGeneratorService.generateRandomNews(query));
+            model.addAttribute("allNews", newsGeneratorService.generateRandomNews(searchObject));
         } else {
             UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
             User authorizedUser = userDetails.getUser();
             User user = userService.getUserById(authorizedUser.getId());
-            model.addAttribute("allNews", newsGeneratorService.generateNews(user, query));
+            model.addAttribute("allNews", newsGeneratorService.generateNews(user, searchObject));
         }
         return "main";
     }
@@ -88,11 +89,11 @@ public class UserController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
         User authorizedUser = userDetails.getUser();
+        // get actual data about user
         User user = userService.getUserById(authorizedUser.getId());
         UserDTO userDTO = convertToUserDTO(user);
         userDTO.getCategories().forEach(e -> System.out.println(e.getName()));
         model.addAttribute("userDTO", userDTO);
-        // TODO check is user is authenticated or not
         List<CategoryDTO> categoriesDTO = categoryService.getAllCategories().stream().map(this::convertToCategoryDTO).toList();
         model.addAttribute("categoriesDTO", categoriesDTO);
         return "profile";

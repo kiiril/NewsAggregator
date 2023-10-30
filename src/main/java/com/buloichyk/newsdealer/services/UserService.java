@@ -15,7 +15,6 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    // TODO if not usage if this file, delete it
     public User getUserByUsername(String username) {
         return userRepository.findByUsername(username).orElse(null);
     }

@@ -1,8 +1,8 @@
-package com.buloichyk.newsdealer.models;
+package com.buloichyk.newsdealer.util;
+
 
 import java.io.Serializable;
 import java.util.Arrays;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class ResponseObject implements Serializable {
     private long totalResults;      // useless should be

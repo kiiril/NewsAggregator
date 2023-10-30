@@ -6,6 +6,7 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Size;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -21,6 +22,7 @@ public class UserDTO {
     private String password;
 
     @Past(message = "Incorrect date of birthday chosen.")
+    @DateTimeFormat(pattern = "yyyy-MM-dd") // fix incorrect passing format to profile
     private LocalDate dateOfBirthday;
 
     @NotNull(message = "Choose country from the list.")
