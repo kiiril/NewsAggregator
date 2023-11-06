@@ -162,7 +162,26 @@ public class NewsObject {
                 ", language='" + language + '\'' +
                 '}';
     }
-    // ASSUMPTION
+
+    public String getColor() {
+        String category = getCategory()[0];
+        return switch (category) {
+            case "top" -> "#fa8072";
+            case "world" -> "#4169e1";
+            case "politics" -> "#a52a2a";
+            case "business" -> "#4682b4";
+            case "science" -> "#b0c4de";
+            case "sports" -> "#ffe4b5";
+            case "environment" -> "90ee90";
+            case "food" -> "#228b22";
+            case "health" -> "#adff2f";
+            case "technology" -> "#6495ed";
+            case "tourism" -> "#f4a460";
+            case "entertainment" -> "#7b68ee";
+            default -> "";
+        };
+    }
+
     public int getId() {
         return id;
     }

@@ -100,12 +100,16 @@ public class UserController {
     }
 
     @PatchMapping ("edit")
-    public String edit(@ModelAttribute("userDTO") UserDTO userDTO, Model model) {
-//        if (bindingResult.hasErrors()) {
-//            List<CategoryDTO> categoriesDTO = categoryService.getAllCategories().stream().map(this::convertToCategoryDTO).toList();
-//            model.addAttribute("categoriesDTO", categoriesDTO);
-//            return "profile";
-//        }
+    public String edit(@ModelAttribute("userDTO") @Valid UserDTO userDTO, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasFieldErrors("username") || bindingResult.hasFieldErrors("dateOfBirthday")) {
+            List<CategoryDTO> categoriesDTO = categoryService.getAllCategories().stream().map(this::convertToCategoryDTO).toList();
+            model.addAttribute("categoriesDTO", categoriesDTO);
+            List<Category> selectedCategories = userDTO.getSelectedCategoriesIds().stream()
+                    .map(categoryService::getById).toList();
+            // need to pass selected categories, otherwise will be an error in rendering page
+            userDTO.setCategories(selectedCategories);
+            return "profile";
+        }
         List<Category> selectedCategories = userDTO.getSelectedCategoriesIds().stream()
                 .map(categoryService::getById).toList();
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

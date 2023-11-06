@@ -31,6 +31,19 @@
                 todayHighlight: true
             });
         });
+
+        // JQuery used to hide error block when user start typing in this field
+        $(document).ready(function() {
+            $('.inputField').on('input', function() {
+                const inputValue = $(this).val();
+                const errorBlock = $(this).next('.invalid-tooltip');
+                if (inputValue.trim() !== '') {
+                    errorBlock.hide();
+                } else {
+                    errorBlock.show();
+                }
+            });
+        });
     </script>
 
   </head>
@@ -49,7 +62,7 @@
                   </svg>
                 </label>
                 <input class="inputField" th:field="*{username}" type="text" name="username" style="border: none; outline: none;" placeholder="Username" id="username">
-<!--                 <div class="invalid-tooltip" style="display: block" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username validation.</div>-->
+                 <div class="invalid-tooltip" style="display: block" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username validation.</div>
               </div>
               <!-- DATEPICKER -->
               <div class="form-group mb-3 position-relative" style="border-bottom: 1px solid #999">
@@ -60,7 +73,7 @@
                   </svg>
                 </label>
                 <input type="text" th:field="*{dateOfBirthday}" class="datepicker inputField" style="border: none; outline: none" placeholder="Date of birthday" id="datepicker">
-<!--                <div class="invalid-tooltip" style="display: block" th:if="${#fields.hasErrors('dateOfBirthday')}" th:errors="*{dateOfBirthday}">Date of birth validation.</div>-->
+                <div class="invalid-tooltip" style="display: block" th:if="${#fields.hasErrors('dateOfBirthday')}" th:errors="*{dateOfBirthday}">Date of birth validation.</div>
               </div>
 
               <div class="container-fluid p-0 m-3 mt-4 mb-4">
@@ -329,7 +342,6 @@
               <!-- CATEGORIES -->
               <div class="ms-1 mb-4 row">
                   <div th:each="category : ${categoriesDTO}" class="col-md-3 p-0">
-                    <!-- FIXME th:field does not work and broke everything -->
                       <input type="checkbox" th:value="${category.id}" th:id="'category-' + ${category.id}" autocomplete="off" th:field="*{selectedCategoriesIds}"/>
                       <label th:for="'category-' + ${category.id}" th:text="${category.name}"></label>
                   </div>
@@ -350,6 +362,7 @@
     </div>
 
       <script th:inline="javascript">
+          // make checked checkboxes after loading a page
           const selectedCategoriesIds = [[${userDTO.categoriesIds}]]
           selectedCategoriesIds.forEach(function (categoryId) {
               const checkbox = document.getElementById('category-' + categoryId)

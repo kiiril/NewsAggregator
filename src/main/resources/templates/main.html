@@ -14,6 +14,7 @@
         font-family: 'Poppins', sans-serif;
         font-weight: 200;
       }
+
     </style>
 
     <script type="application/javascript">
@@ -95,51 +96,132 @@
   </nav>
 
   <div class="container-fluid">
-    <!-- Search Field -->
     <div class="row">
-      <!-- search field -->
-      <form th:action="@{/main}" class="d-flex" method="GET" th:object="${searchObject}">
-        <div class="col-4 p-0">
+      <!-- Common Form for col-4 and col-6 -->
+      <form th:action="@{/main}" class="d-flex align-items-center" method="GET" th:object="${searchObject}">
+        <!-- First Column (col-4) -->
+        <div class="col-4">
+          <div class="p-0">
             <input class="p-0 m-0" style="width: 65%" th:field="*{query}" type="search" name="query" id="searchField" placeholder="Search...">
             <button type="submit" class="btn btn-primary py-1">Search</button>
+          </div>
         </div>
 
-        <div class="col-8 d-flex align-items-center">
-          <!-- radio button -->
+        <!-- Second Column (col-6) -->
+        <div class="col-7 d-flex me-5">
+          <!-- Radio buttons for the common form -->
           <div class="form-check me-4">
             <input class="form-check-input" type="radio" th:checked="${searchObject.titleSearch}" th:field="*{titleSearch}" th:value="true" name="commonSearch" id="titleSearch">
             <label class="form-check-label" for="titleSearch">
               Search in titles
             </label>
           </div>
-          <!-- radio button -->
           <div class="form-check me-4">
             <input class="form-check-input" type="radio" th:checked="${!searchObject.titleSearch}" th:field="*{titleSearch}" th:value="false" name="commonSearch" id="newsSearch">
             <label class="form-check-label" for="newsSearch">
               Search in news
             </label>
           </div>
-
           <div class="form-check">
             <input class="form-check-input" type="checkbox" th:field="*{specifiedForCountry}" autocomplete="off" value="true" name="specifiedForCountry" id="specifiedForCountry"/>
-            <label class="form-check-label me-4" for="specifiedForCountry">Only for my country</label>
+            <label class="form-check-label" for="specifiedForCountry">Only for my country</label>
           </div>
+        </div>
 
-          <span>Here must also be filter</span>
+        <div class="col-3 dropdown">
+          <button class="btn" type="button" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-sliders" viewBox="0 0 16 16">
+              <path fill-rule="evenodd" d="M11.5 2a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM9.05 3a2.5 2.5 0 0 1 4.9 0H16v1h-2.05a2.5 2.5 0 0 1-4.9 0H0V3h9.05zM4.5 7a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM2.05 8a2.5 2.5 0 0 1 4.9 0H16v1H6.95a2.5 2.5 0 0 1-4.9 0H0V8h2.05zm9.45 4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm-2.45 1a2.5 2.5 0 0 1 4.9 0H16v1h-2.05a2.5 2.5 0 0 1-4.9 0H0v-1h9.05z"/>
+            </svg>
+          </button>
+          <ul class="dropdown-menu">
+            <li>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" th:field="*{sortByTitle}" name="filter" id="filterByTitle">
+                <label class="form-check-label" for="filterByTitle">
+                  Sort by title
+                </label>
+              </div>
+            </li>
+            <li>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" th:field="*{sortByRelevance}" name="filter" id="filterByRelevance">
+                <label class="form-check-label" for="filterByRelevance">
+                  Sort by relevance
+                </label>
+              </div>
+            </li>
 
+            <li><hr class="dropdown-divider"></li>
+
+            <li>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" th:field="*{timeframe}" name="timeframe" id="timeframe1hour">
+                <label class="form-check-label" for="timeframe1hour">
+                  Last 1 hour
+                </label>
+              </div>
+            </li>
+
+            <li>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" th:field="*{timeframe}" name="timeframe" id="timeframe6hours">
+                <label class="form-check-label" for="timeframe6hours">
+                  Last 6 hours
+                </label>
+              </div>
+            </li>
+
+            <li>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" th:field="*{timeframe}" name="timeframe" id="timeframe24hours">
+                <label class="form-check-label" for="timeframe24hours">
+                  Last 24 hours
+                </label>
+              </div>
+            </li>
+
+            <li><hr class="dropdown-divider"></li>
+
+            <li>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" th:filed="*{timeframe}" id="priorityDomain">
+                <label class="form-check-label" for="priorityDomain">
+                  Priority Domain
+                </label>
+              </div>
+            </li>
+
+            <li class="justify-content-center">
+              <button class="btn btn-primary" type="submit">Apply</button>
+            </li>
+          </ul>
         </div>
       </form>
-    </div>
 
-    <!-- Main Content Row -->
+      <!-- Third Column (col-2) -->
+    </div>
+  </div>
+
+
+
+  <!-- Main Content Row -->
     <div class="row mt-2">
       <!-- Selection Block (30% width) -->
       <div class="col-3 p-0" style="height: 100vh; overflow-y: scroll">
         <div class="list-group">
           <!-- Your block options here -->
-          <a th:each="news: ${allNews.getResults()}" href="#" class="list-group-item list-group-item-action p-auto" data-bs-toggle="collapse" th:data-bs-target="'#newsPage' + ${news.getId()}" aria-expanded="false" th:aria-controls="'#newsPage' + ${news.getId()}" role="button" data-bs-parent="#fullPages">
-            <h6 th:text="${news.getTitle()}">News Title</h6>
-            <p th:text="${news.getDescription()}" class="fs-6 m-auto">Description of news</p>
+          <a th:each="news: ${allNews.getResults()}" href="#" style="background-color: #fbfaf8; text-align: justify" class="list-group-item list-group-item-action p-auto" data-bs-toggle="collapse" th:data-bs-target="'#newsPage' + ${news.getId()}" aria-expanded="false" th:aria-controls="'#newsPage' + ${news.getId()}" role="button" data-bs-parent="#fullPages">
+            <div class="d-flex">
+              <span class="d-inline-block rounded-circle text-light p-2 me-1" th:style="'background-color:' + ${news.getColor()} + '; height: 15px; width: 15px;'">&nbsp;</span>
+              <h6 th:text="${news.getTitle()}">
+                News Title
+              </h6>
+            </div>
+            <p class="fs-6 m-auto">
+              <span th:text="${news.getDescription()}">Description of news</span>
+            </p>
+
           </a>
               <!-- Add more options as needed -->
         </div>
@@ -148,9 +230,14 @@
       <!-- Additional Information (70% width) -->
       <div class="col-9" style="height: 100vh; overflow-y: scroll" id="fullPages">
         <!-- add unique id -->
-        <div th:each="news : ${allNews.getResults()}" th:id="'newsPage' + ${news.getId()}" class="collapse unique">
+        <div th:each="news : ${allNews.getResults()}" th:id="'newsPage' + ${news.getId()}" class="collapse unique px-4 pt-3">
+          <span class="rounded-2 px-1" th:style="'background-color:' + ${news.getColor()}" th:text="${news.getCategory()[0].substring(0, 1).toUpperCase() + news.getCategory()[0].substring(1)}">Category</span>
           <h2 th:text="${news.getTitle()}">News Title</h2>
-          <p th:text="${news.getContent()}">Full news content goes here.</p>
+          <p class="fst-italic" th:text="${news.getDescription()}"></p>
+          <div class="container-fluid px-5 pb-3 pt-1">
+            <img th:if="${news.image_url}" class="img-fluid w-100" style="height: 100%" th:src="${news.image_url}">
+          </div>
+          <p style="text-align: justify" th:text="${news.getContent()}">Full news content goes here.</p>
           <p>
             <span th:text="${news.getCountry()[0]}"></span>
             <span th:text="${news.getCategory()[0]}"></span>

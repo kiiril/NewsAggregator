@@ -31,7 +31,7 @@
 <h3 align="center">News Dealer</h3>
 
   <p align="center">
-    Web application that will generate news by your preferencies!
+    A web application that customizes news according to your preferences.
   </p>
 </div>
 
@@ -70,7 +70,7 @@
 
 [![Product Name Screen Shot][product-screenshot]](https://example.com)
 
-Here's a blank template to get started: To avoid retyping too much info. Do a search and replace with your text editor for the following: `github_username`, `repo_name`, `twitter_handle`, `linkedin_username`, `email_client`, `email`, `project_title`, `project_description`
+This web application is developed for people which love to read news, but do not appreciate distraction like advertisement, non-intereted topics and too many information. You can sign up for the first time, select interested topics and read news only interested to you.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -80,11 +80,10 @@ Here's a blank template to get started: To avoid retyping too much info. Do a se
 
 * [![Java][Java.com]][Java-url]
 * [![Spring][Spring.io]][Spring-url]
-* [![Vue][Vue.js]][Vue-url]
-* [![Angular][Angular.io]][Angular-url]
-* [![Svelte][Svelte.dev]][Svelte-url]
-* [![Laravel][Laravel.com]][Laravel-url]
+* [![Thymeleaf][Thymeleaf.org]][Thymeleaf-url]
+* [![Postgresql][Postgresql.org]][Postgresql-url]
 * [![Bootstrap][Bootstrap.com]][Bootstrap-url]
+* [![Javascript][Javascript.com]][Javascript-url]
 * [![JQuery][JQuery.com]][JQuery-url]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -94,31 +93,26 @@ Here's a blank template to get started: To avoid retyping too much info. Do a se
 <!-- GETTING STARTED -->
 ## Getting Started
 
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
+This project is creating for trainings objectives, that's why it can be used only if you start server on your local computer.
 
 ### Prerequisites
 
-This is an example of how to list things you need to use the software and how to install them.
-* npm
-  ```sh
-  npm install npm@latest -g
-  ```
+Install PostgreSQL database on your computer: https://www.postgresql.org
 
 ### Installation
 
-1. Get a free API Key at [https://example.com](https://example.com)
+1. Get a free API Key at https://newsdata.io/documentation/#get-newdata-api-key
 2. Clone the repo
    ```sh
-   git clone https://github.com/github_username/repo_name.git
+   git clone https://github.com/kiiril/web-app-project
    ```
 3. Install NPM packages
    ```sh
    npm install
    ```
-4. Enter your API in `config.js`
+4. Enter your API in `/services/NewsGeneratorService`
    ```js
-   const API_KEY = 'ENTER YOUR API';
+   public static final API_KEY = 'ENTER YOUR API';
    ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -230,3 +224,14 @@ Project Link: [https://github.com/github_username/repo_name](https://github.com/
 [Bootstrap-url]: https://getbootstrap.com
 [JQuery.com]: https://img.shields.io/badge/jQuery-0769AD?style=for-the-badge&logo=jquery&logoColor=white
 [JQuery-url]: https://jquery.com 
+
+[Java.com]: https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white
+[Java-url]: https://www.java.com/
+[Spring.io]: https://img.shields.io/badge/spring-%236DB33F.svg?style=for-the-badge&logo=spring&logoColor=white
+[Spring-url]: https://spring.io
+[Thymeleaf.org]: https://img.shields.io/badge/Thymeleaf-%23005C0F.svg?style=for-the-badge&logo=Thymeleaf&logoColor=white
+[Thymeleaf-url]: https://www.thymeleaf.org
+[Postgresql.org]: https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white
+[Postgresql-url]: https://www.postgresql.org
+[Javascript.com]: https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E
+[Javascript-url]: https://www.javascript.com

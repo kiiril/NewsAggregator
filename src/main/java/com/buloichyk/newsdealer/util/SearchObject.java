@@ -5,7 +5,15 @@ public class SearchObject {
     private boolean titleSearch;
     private boolean specifiedForCountry;
 
-    // TODO add filters for news
+    private boolean sortByTitle;
+
+    private boolean sortByRelevance;
+
+    private Integer timeframe;
+
+    private boolean priorityDomain;
+
+    // domain relevance maybe
 
 
     public String getQuery() {
@@ -30,5 +38,37 @@ public class SearchObject {
 
     public void setSpecifiedForCountry(boolean specifiedForCountry) {
         this.specifiedForCountry = specifiedForCountry;
+    }
+
+    public boolean isSortByTitle() {
+        return sortByTitle;
+    }
+
+    public void setSortByTitle(boolean sortByTitle) {
+        this.sortByTitle = sortByTitle;
+    }
+
+    public boolean isSortByRelevance() {
+        return sortByRelevance;
+    }
+
+    public void setSortByRelevance(boolean sortByRelevance) {
+        this.sortByRelevance = sortByRelevance;
+    }
+
+    public Integer getTimeframe() {
+        return timeframe;
+    }
+
+    public void setTimeframe(Integer timeframe) {
+        this.timeframe = timeframe;
+    }
+
+    public boolean isPriorityDomain() {
+        return priorityDomain;
+    }
+
+    public void setPriorityDomain(boolean priorityDomain) {
+        this.priorityDomain = priorityDomain;
     }
 }

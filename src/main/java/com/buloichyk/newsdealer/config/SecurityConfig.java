@@ -30,7 +30,7 @@ public class SecurityConfig {
                 .formLogin(form -> form
                         .loginPage("/login")
                         .loginProcessingUrl("/process_login")
-                        .defaultSuccessUrl("/main", true)
+                        .defaultSuccessUrl("/profile", true)
                         .failureUrl("/login?error"))
                         .logout(user -> user.logoutUrl("/logout").logoutSuccessUrl("/login"));
         http.userDetailsService(usersDetailsService);
