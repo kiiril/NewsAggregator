@@ -25,13 +25,11 @@ import java.util.List;
 
 @Controller
 public class UserController {
-
     private final RegistrationService registrationService;
     private final CategoryService categoryService;
-    private final ModelMapper modelMapper;
-
-    private final NewsGeneratorService newsGeneratorService;
     private final UserService userService;
+    private final NewsGeneratorService newsGeneratorService;
+    private final ModelMapper modelMapper;
 
     @Autowired
     public UserController(RegistrationService registrationService, CategoryService categoryService, ModelMapper modelMapper, NewsGeneratorService newsGeneratorService, UserService userService) {

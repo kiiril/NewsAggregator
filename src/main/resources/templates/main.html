@@ -40,8 +40,6 @@
 
   <body>
 
-  <!-- TODO change endpoint on the buttons -->
-
   <nav class="navbar navbar-expand-lg">
     <div class="container-fluid border-bottom">
       <a class="navbar-brand" href="#">
@@ -66,7 +64,7 @@
               <button type="submit" class="btn btn-primary">Sign-up</button>
             </form>
           </li>
-<!--          btn class makes font-weight: 400 -->
+
           <li class="nav-item dropdown">
             <button class="btn dropdown" data-bs-toggle="dropdown" aria-expanded="false">
               <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">-->
@@ -81,7 +79,6 @@
                 </form>
               </li>
               <li>
-              <!-- either form or href without th -->
                 <a class="dropdown-item" href="/settings">Settings</a></li>
               <li>
                 <form method="POST" th:action="@{/logout}">
@@ -97,8 +94,7 @@
 
   <div class="container-fluid">
     <div class="row">
-      <!-- Common Form for col-4 and col-6 -->
-      <form th:action="@{/main}" class="d-flex align-items-center" method="GET" th:object="${searchObject}">
+      <form th:action="@{/main}" class="d-flex align-items-center" method="GET" th:object="${searchObject}" id="form">
         <!-- First Column (col-4) -->
         <div class="col-4">
           <div class="p-0">
@@ -109,7 +105,6 @@
 
         <!-- Second Column (col-6) -->
         <div class="col-7 d-flex me-5">
-          <!-- Radio buttons for the common form -->
           <div class="form-check me-4">
             <input class="form-check-input" type="radio" th:field="*{titleSearch}" value="true" name="commonSearch" id="titleSearch">
             <label class="form-check-label" for="titleSearch">
@@ -212,7 +207,7 @@
 
             <li class="justify-content-center">
               <button class="btn btn-primary py-1 me-2" type="submit">Apply</button>
-              <x></x><button class="btn btn-danger py-1" type="button">Clear</button>
+              <button class="btn btn-danger py-1" type="button" onclick="resetFields()">Clear</button>
             </li>
           </ul>
         </div>
@@ -224,10 +219,10 @@
 
   <!-- Main Content Row -->
     <div class="row mt-2">
+      <div th:if="${allNews.getTotalResults() == 0}">No data was found by these criteria</div>
       <!-- Selection Block (30% width) -->
       <div class="col-3 p-0" style="height: 100vh; overflow-y: scroll">
         <div class="list-group">
-          <!-- Your block options here -->
           <a th:each="news: ${allNews.getResults()}" href="#" style="background-color: #fbfaf8; text-align: justify" class="list-group-item list-group-item-action p-auto" data-bs-toggle="collapse" th:data-bs-target="'#newsPage' + ${news.getId()}" aria-expanded="false" th:aria-controls="'#newsPage' + ${news.getId()}" role="button" data-bs-parent="#fullPages">
             <div class="d-flex">
               <span class="d-inline-block rounded-circle text-light p-2 me-1" th:style="'background-color:' + ${news.getColor()} + '; height: 15px; width: 15px;'">&nbsp;</span>
@@ -238,9 +233,7 @@
             <p class="fs-6 m-auto">
               <span th:text="${news.getDescription()}">Description of news</span>
             </p>
-
           </a>
-              <!-- Add more options as needed -->
         </div>
       </div>
 
@@ -264,6 +257,23 @@
         </div>
       </div>
     </div>
+
+  <script type="text/javascript">
+    function resetFields() {
+      // TERRIBLE CODE
+      document.getElementById('titleSearch').checked = false;
+      document.getElementById('specifiedForCountry').checked = false;
+      document.getElementById('newestFirst').checked = false;
+      document.getElementById('oldestFirst').checked = false;
+      document.getElementById('timeframe1hour').checked = false;
+      document.getElementById('timeframe6hours').checked = false;
+      document.getElementById('timeframe24hours').checked = false;
+      document.getElementById('top10sources').checked = false;
+      document.getElementById('top30sources').checked = false;
+      document.getElementById('top50sources').checked = false;
+      document.getElementById('form').submit();
+    }
+  </script>
 
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
