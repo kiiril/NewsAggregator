@@ -1,5 +1,7 @@
 package com.buloichyk.newsdealer.util;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 
 public class NewsObject {
@@ -14,7 +16,7 @@ public class NewsObject {
     private String video_url;
     private String description;
     private String content;
-    private String pubDate;
+    private LocalDateTime pubDate;
     private String image_url;
     private String source_id;       // useless
     private long source_priority;   // useless
@@ -86,12 +88,13 @@ public class NewsObject {
         this.content = content;
     }
 
-    public String getPubDate() {
+    public LocalDateTime getPubDate() {
         return pubDate;
     }
 
-    public void setPubDate(String pubDate) {
-        this.pubDate = pubDate;
+    public void setPubDate(String stringPubDate) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        this.pubDate = LocalDateTime.parse(stringPubDate, formatter);
     }
 
     public String getImage_url() {

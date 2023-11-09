@@ -25,7 +25,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/github_username/repo_name">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
+    <img src="src/main/resources/static/icon.ico" alt="Logo" width="80" height="80">
   </a>
 
 <h3 align="center">News Dealer</h3>
@@ -56,10 +56,7 @@
     </li>
     <li><a href="#usage">Usage</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
 </details>
 
@@ -68,9 +65,9 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+![Product Name Screen Shot][product-screenshot]
 
-This web application is developed for people which love to read news, but do not appreciate distraction like advertisement, non-intereted topics and too many information. You can sign up for the first time, select interested topics and read news only interested to you.
+This web application is developed for people which love to read news, but do not appreciate distraction like advertisement, non-relevant topics and too many information. You can sign up for the first time, select interested topics and read news only interested to you.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -97,20 +94,23 @@ This project is creating for trainings objectives, that's why it can be used onl
 
 ### Prerequisites
 
-Install PostgreSQL database on your computer: https://www.postgresql.org
+Install PostgreSQL on your computer: https://www.postgresql.org and create a database
 
 ### Installation
 
 1. Get a free API Key at https://newsdata.io/documentation/#get-newdata-api-key
 2. Clone the repo
    ```sh
-   git clone https://github.com/kiiril/web-app-project
+   git clone https://github.com/kiiril/NewsAggregator
    ```
-3. Install NPM packages
+3. Copy code from `sql_code` and paste to your query console
+4. In `application.properties.origin` insert database url, your username and password. RENAME file to `application.properties`
    ```sh
-   npm install
+   spring.datasource.url=
+   spring.datasource.username=
+   spring.datasource.password=
    ```
-4. Enter your API in `/services/NewsGeneratorService`
+5. Enter your API in `/services/NewsGeneratorService`
    ```js
    public static final API_KEY = 'ENTER YOUR API';
    ```
@@ -140,35 +140,7 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 
 See the [open issues](https://github.com/github_username/repo_name/issues) for a full list of proposed features (and known issues).
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-
-<!-- CONTRIBUTING -->
-## Contributing
-
-Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
-
-If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
-Don't forget to give the project a star! Thanks again!
-
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-
-<!-- LICENSE -->
-## License
-
-Distributed under the MIT License. See `LICENSE.txt` for more information.
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
+<p align="right">(<a href="#readme-top">back to top</a>)</p>  
 
 
 <!-- CONTACT -->
@@ -180,16 +152,6 @@ Project Link: [https://github.com/github_username/repo_name](https://github.com/
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-
-
-<!-- ACKNOWLEDGMENTS -->
-## Acknowledgments
-
-* []()
-* []()
-* []()
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 
@@ -207,7 +169,7 @@ Project Link: [https://github.com/github_username/repo_name](https://github.com/
 [license-url]: https://github.com/github_username/repo_name/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/linkedin_username
-[product-screenshot]: images/screenshot.png
+[product-screenshot]: demos/demo_main.png
 [Next.js]: https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
 [Next-url]: https://nextjs.org/
 [React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB

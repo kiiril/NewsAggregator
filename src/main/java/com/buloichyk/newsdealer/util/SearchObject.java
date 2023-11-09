@@ -5,13 +5,13 @@ public class SearchObject {
     private boolean titleSearch;
     private boolean specifiedForCountry;
 
-    private boolean sortByTitle;
+    private boolean newestFirst;
 
-    private boolean sortByRelevance;
+    private boolean oldestFirst;
 
     private Integer timeframe;
 
-    private boolean priorityDomain;
+    private String priorityDomain;
 
     // domain relevance maybe
 
@@ -40,20 +40,20 @@ public class SearchObject {
         this.specifiedForCountry = specifiedForCountry;
     }
 
-    public boolean isSortByTitle() {
-        return sortByTitle;
+    public boolean isNewestFirst() {
+        return newestFirst;
     }
 
-    public void setSortByTitle(boolean sortByTitle) {
-        this.sortByTitle = sortByTitle;
+    public void setNewestFirst(boolean newestFirst) {
+        this.newestFirst = newestFirst;
     }
 
-    public boolean isSortByRelevance() {
-        return sortByRelevance;
+    public boolean isOldestFirst() {
+        return oldestFirst;
     }
 
-    public void setSortByRelevance(boolean sortByRelevance) {
-        this.sortByRelevance = sortByRelevance;
+    public void setOldestFirst(boolean oldestFirst) {
+        this.oldestFirst = oldestFirst;
     }
 
     public Integer getTimeframe() {
@@ -64,11 +64,11 @@ public class SearchObject {
         this.timeframe = timeframe;
     }
 
-    public boolean isPriorityDomain() {
+    public String getPriorityDomain() {
         return priorityDomain;
     }
 
-    public void setPriorityDomain(boolean priorityDomain) {
+    public void setPriorityDomain(String priorityDomain) {
         this.priorityDomain = priorityDomain;
     }
 }

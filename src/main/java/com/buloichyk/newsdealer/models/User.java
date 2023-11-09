@@ -2,13 +2,9 @@ package com.buloichyk.newsdealer.models;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
-import org.hibernate.annotations.Check;
-import org.hibernate.validator.constraints.Range;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 @Entity
 @Table(name = "person")

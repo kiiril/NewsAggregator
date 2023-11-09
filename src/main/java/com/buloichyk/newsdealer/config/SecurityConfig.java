@@ -25,12 +25,12 @@ public class SecurityConfig {
     public SecurityFilterChain applicationSecurity(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((authorize) -> authorize
-                        .requestMatchers("/main", "/login", "/registration", "/login-image.jpeg", "/registration-image.jpeg", "/search", "/profile.jpeg", "/profile").permitAll()
+                        .requestMatchers("/main", "/login", "/registration", "/search", "/profile", "login-image.jpeg", "registration-image.jpeg", "profile.jpeg").permitAll()
                         .anyRequest().authenticated())
                 .formLogin(form -> form
                         .loginPage("/login")
                         .loginProcessingUrl("/process_login")
-                        .defaultSuccessUrl("/profile", true)
+                        .defaultSuccessUrl("/main", true)
                         .failureUrl("/login?error"))
                         .logout(user -> user.logoutUrl("/logout").logoutSuccessUrl("/login"));
         http.userDetailsService(usersDetailsService);
