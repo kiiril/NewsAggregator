@@ -13,7 +13,7 @@ public class SearchObject {
 
     private String priorityDomain;
 
-    // domain relevance maybe
+    private String nextPage;
 
 
     public String getQuery() {
@@ -70,5 +70,13 @@ public class SearchObject {
 
     public void setPriorityDomain(String priorityDomain) {
         this.priorityDomain = priorityDomain;
+    }
+
+    public String getNextPage() {
+        return nextPage;
+    }
+
+    public void setNextPage(String nextPage) {
+        this.nextPage = nextPage;
     }
 }

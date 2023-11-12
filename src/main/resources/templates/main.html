@@ -82,7 +82,7 @@
                 <a class="dropdown-item" href="/settings">Settings</a></li>
               <li>
                 <form method="POST" th:action="@{/logout}">
-                  <button class="dropdown-item" type="submit" style="background-color: red">Log Out</button>
+                  <button class="dropdown-item" type="submit" onmouseover="this.style.backgroundColor='#DC143C'; this.style.color='white'" onmouseout="this.style.backgroundColor='white';this.style.color='black'">Log Out</button>
                 </form>
               </li>
             </ul>
@@ -121,6 +121,7 @@
             <input class="form-check-input" type="checkbox" th:field="*{specifiedForCountry}" autocomplete="off" value="true" name="specifiedForCountry" id="specifiedForCountry"/>
             <label class="form-check-label" for="specifiedForCountry">Only for my country</label>
           </div>
+          <input type="hidden" th:field="*{nextPage}" id="nextPage">
         </div>
 
         <div class="col-3 dropdown">
@@ -207,7 +208,7 @@
 
             <li class="justify-content-center">
               <button class="btn btn-primary py-1 me-2" type="submit">Apply</button>
-              <button class="btn btn-danger py-1" type="button" onclick="resetFields()">Clear</button>
+              <button class="btn py-1" style="background-color: #DC143C; color: white" type="button" onclick="resetFields()">Clear</button>
             </li>
           </ul>
         </div>
@@ -235,6 +236,10 @@
             </p>
           </a>
         </div>
+        <div class="d-flex justify-content-center py-3 border" style="background-color: #fbfaf8">
+          <button class="btn btn-secondary rounded-pill me-5" onclick="window.history.back()">< Previous</button>
+          <button class="btn btn-primary rounded-pill" type="button" onclick="nextPage()">Next ></button>
+        </div>
       </div>
 
       <!-- Additional Information (70% width) -->
@@ -250,15 +255,14 @@
           <p style="text-align: justify" th:text="${news.getContent()}">Full news content goes here.</p>
           <p>
             <span th:text="${news.getCountry()[0]}"></span>
-            <span th:text="${news.getCategory()[0]}"></span>
-            <span th:text="${news.getPubDate()}"></span>
-            <a th:href="${news.getLink()}" th:text="${news.getLink()}"></a>
+            <span th:text="${#temporals.format(news.getPubDate()  , 'dd.MM.yyyy HH:mm')}"></span>
+            <a th:href="${news.getLink()}" th:text="source"></a>
           </p>
         </div>
       </div>
     </div>
 
-  <script type="text/javascript">
+  <script type="text/javascript" th:inline="javascript">
     function resetFields() {
       // TERRIBLE CODE
       document.getElementById('titleSearch').checked = false;
@@ -272,6 +276,13 @@
       document.getElementById('top30sources').checked = false;
       document.getElementById('top50sources').checked = false;
       document.getElementById('form').submit();
+    }
+
+    // save the next page string value to the hidden field in the form
+    function nextPage() {
+      const nextPage = document.getElementById("nextPage")
+      nextPage.value = [[${allNews.nextPage}]]
+      document.getElementById("form").submit()
     }
   </script>
 

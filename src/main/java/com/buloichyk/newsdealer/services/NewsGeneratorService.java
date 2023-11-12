@@ -14,7 +14,7 @@ import java.util.Comparator;
 @Service
 public class NewsGeneratorService {
 
-    private static final String API_KEY = "apikey=pub_30680664b8e369f58dc8cbbeebd4540e5069a";
+    private static final String API_KEY = "apikey=ENTER YOUR API";
     private static final String URL = "https://newsdata.io/api/1/news?";
 
     public ResponseObject generateNews(User user, SearchObject searchObject) {
@@ -78,6 +78,10 @@ public class NewsGeneratorService {
 
         if (searchObject.getPriorityDomain() != null)
             url.append("&prioritydomain=").append(searchObject.getPriorityDomain());
+
+        if (searchObject.getNextPage() != null && !searchObject.getNextPage().isEmpty()) {
+            url.append("&page=").append(searchObject.getNextPage());
+        }
 
         return url;
     }
